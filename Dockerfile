@@ -52,4 +52,6 @@ RUN apt-get update \
     && apt-get clean \
     # Change timezone
     && echo "Europe/Paris" > /etc/timezone \
-    && dpkg-reconfigure -f noninteractive tzdata
+    && dpkg-reconfigure -f noninteractive tzdata \
+    # enable httpd mods
+    && a2enmod rewrite proxy deflate mime expires
