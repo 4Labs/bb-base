@@ -1,4 +1,4 @@
-FROM php:5.6-fpm
+FROM php:5.6-apache
 MAINTAINER Damien PIQUET <dpiquet@teicee.com>
 
 ARG PHP_APCU_VERSION=4.0.11
