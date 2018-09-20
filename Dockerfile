@@ -67,4 +67,5 @@ RUN    bash -c "mkdir /usr/share/man/man{1..9}" \
         proxy \
         deflate \
         mime \
-        expires
+        expires \
+        proxy_http
