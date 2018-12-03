@@ -10,6 +10,7 @@ RUN    bash -c "mkdir /usr/share/man/man{1..9}" \
        # Install required packages
     && apt-get update \
     && apt-get install -y \
+        sudo \
         imagemagick \
         libicu-dev \
         zlib1g-dev \
