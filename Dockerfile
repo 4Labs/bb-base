@@ -23,6 +23,7 @@ RUN    bash -c "mkdir /usr/share/man/man{1..9}" \
         locales-all \
         man \
         postgresql-client \
+        git \
        # Prepare the xdebug docker php extensions
     && docker-php-source extract \
     && curl -L -o /tmp/xdebug-$PHP_XDEBUG_VERSION.tgz http://xdebug.org/files/xdebug-$PHP_XDEBUG_VERSION.tgz \
