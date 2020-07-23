@@ -20,6 +20,9 @@ RUN    bash -c "mkdir /usr/share/man/man{1..9}" \
         libmemcached-dev \
         libpng-dev \
         libxml2-dev \
+        libjpeg-dev \
+        libfreetype6-dev \
+        libxpm-dev \
         locales-all \
         man \
         postgresql-client \
@@ -32,7 +35,10 @@ RUN    bash -c "mkdir /usr/share/man/man{1..9}" \
     && rm -r \
         /tmp/xdebug-$PHP_XDEBUG_VERSION.tgz \
     && mv xdebug-$PHP_XDEBUG_VERSION /usr/src/php/ext/xdebug \
-       # Install docker php extensions
+    # Install docker php extensions
+    && docker-php-ext-configure gd --with-gd --with-webp-dir --with-jpeg-dir \
+       --with-png-dir --with-zlib-dir --with-xpm-dir --with-freetype-dir \
+       --enable-gd-native-ttf \
     && docker-php-ext-install \
         intl \
         mbstring \
@@ -53,7 +59,7 @@ RUN    bash -c "mkdir /usr/share/man/man{1..9}" \
     && pear install channel://pear.php.net/OLE-1.0.0RC2 \
     && pecl install memcached-2.2.0 \
     && docker-php-ext-enable memcached \
-    && pecl install memcache \
+    && pecl install memcache-2.2.7 \
     && docker-php-ext-enable memcache \
     && docker-php-source delete \
     && php -r "readfile('https://getcomposer.org/installer');" | php -- --install-dir=/usr/local/bin --filename=composer \
