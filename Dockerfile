@@ -79,3 +79,6 @@ RUN    bash -c "mkdir /usr/share/man/man{1..9}" \
         mime \
         expires \
         proxy_http
+
+# PHP sessions are store in /tmp
+VOLUME /tmp
