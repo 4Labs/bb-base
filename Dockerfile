@@ -1,5 +1,4 @@
 FROM php:5.6-apache
-MAINTAINER Damien PIQUET <dpiquet@teicee.com>
 
 ARG PHP_APCU_VERSION=4.0.11
 ARG PHP_XDEBUG_VERSION=2.4.1
@@ -62,7 +61,10 @@ RUN    bash -c "mkdir /usr/share/man/man{1..9}" \
     && pecl install memcache-2.2.7 \
     && docker-php-ext-enable memcache \
     && docker-php-source delete \
-    && php -r "readfile('https://getcomposer.org/installer');" | php -- --install-dir=/usr/local/bin --filename=composer \
+    #
+    # Install latest composer 1
+    #
+    && curl https://getcomposer.org/composer-1.phar > /usr/local/bin/composer \
     && chmod +x /usr/local/bin/composer \
     && curl -L -o /usr/bin/phpunit https://phar.phpunit.de/phpunit-5.7.phar \
     && chmod +x /usr/bin/phpunit \
