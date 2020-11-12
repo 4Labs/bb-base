@@ -8,6 +8,7 @@ ARG PHP_XDEBUG_VERSION=2.4.1
 RUN    bash -c "mkdir /usr/share/man/man{1..9}" \
        # Install required packages
     && apt-get update \
+    && apt-get upgrade -y \
     && apt-get install -y \
         sudo \
         imagemagick \
