@@ -53,6 +53,7 @@ RUN    bash -c "mkdir /usr/share/man/man{1..9}" \
         gettext \
         gd \
         soap \
+        sockets \
     && pear install HTML_Common \
     && pear install HTML_QuickForm \
     && pear install Config \
