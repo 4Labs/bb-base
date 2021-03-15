@@ -1,5 +1,7 @@
 FROM php:5.6-apache
 
+ENV TZ=Europe/Paris
+
 ARG PHP_APCU_VERSION=4.0.11
 ARG PHP_XDEBUG_VERSION=2.4.1
 
@@ -73,8 +75,6 @@ RUN    bash -c "mkdir /usr/share/man/man{1..9}" \
     && /usr/bin/phpunit --version \
     && apt-get clean \
        # Change timezone
-    && echo "Europe/Paris" > /etc/timezone \
-    && dpkg-reconfigure -f noninteractive tzdata \
        # Enable httpd mods
     && a2enmod \
         rewrite \
