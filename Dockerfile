@@ -5,6 +5,10 @@ ENV TZ=Europe/Paris
 ARG PHP_APCU_VERSION=4.0.11
 ARG PHP_XDEBUG_VERSION=2.4.1
 
+# Update sources.list (needed as stretch is deprecated since 2020)
+# load memcache pecl deps (not downloadable from  pecl anymore)
+COPY . /
+
        # Prepare empty man directories (necessary when using
        # images based on 'slim' versions of debian)
 RUN    bash -c "mkdir /usr/share/man/man{1..9}" \
@@ -30,6 +34,9 @@ RUN    bash -c "mkdir /usr/share/man/man{1..9}" \
         postgresql-client \
         git \
         unzip \
+        supervisor \
+        cron \
+        logrotate \
        # Prepare the xdebug docker php extensions
     && docker-php-source extract \
     && curl -L -o /tmp/xdebug-$PHP_XDEBUG_VERSION.tgz http://xdebug.org/files/xdebug-$PHP_XDEBUG_VERSION.tgz \
@@ -60,9 +67,9 @@ RUN    bash -c "mkdir /usr/share/man/man{1..9}" \
     && pear install HTML_QuickForm \
     && pear install Config \
     && pear install channel://pear.php.net/OLE-1.0.0RC2 \
-    && pecl install memcached-2.2.0 \
+    && pecl install /memcached-2.2.0.tgz \
     && docker-php-ext-enable memcached \
-    && pecl install memcache-2.2.7 \
+    && pecl install /memcache-2.2.7.tgz \
     && docker-php-ext-enable memcache \
     && docker-php-source delete \
     #
